@@ -25,5 +25,3 @@ public interface NoteDao {
     LiveData<List<Note>> getAllNotes();
 
 }
-
-//this is a test

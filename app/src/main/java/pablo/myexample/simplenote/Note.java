@@ -7,16 +7,26 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note_table")
 public class Note {
-
-    @PrimaryKey
+    
     @NonNull
+    @PrimaryKey
     private String title;
 
     private String description;
 
-    public Note(String title, String description) {this.title = title;this.description = description;}
+    private String noteTitle;
+
+    public Note(String title, String description, String noteTitle) {
+        this.title = title;
+        this.description = description;
+        this.noteTitle = noteTitle;
+    }
 
     public String getTitle(){return this.title;}
 
     public String getDescription(){return this.description;}
+
+    public String getNoteTitle() {
+        return noteTitle;
+    }
 }

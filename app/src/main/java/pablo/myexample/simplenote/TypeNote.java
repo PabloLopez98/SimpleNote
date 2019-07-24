@@ -11,14 +11,18 @@ import android.widget.EditText;
 import android.widget.Toolbar;
 
 public class TypeNote extends AppCompatActivity {
-
+    public static final String EXTRA_ID =
+            "THE_EXTRA_ID";
     public static final String EXTRA_TITLE =
             "THE_EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
             "THE_EXTRA_DESCRIPTION";
+    public static final String EXTRA_NOTE_TITLE =
+            "THE_EXTRA_NOTE_TITLE";
 
     private EditText inputTitle;
     private EditText inputDescription;
+    private String sameTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,15 @@ public class TypeNote extends AppCompatActivity {
         inputDescription = findViewById(R.id.inputDescription);
 
         final Button saveButton = findViewById(R.id.savebutton);
+
+        final Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            sameTitle = intent.getStringExtra(EXTRA_TITLE);
+            inputTitle.setText(intent.getStringExtra(EXTRA_NOTE_TITLE));
+            inputDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+        }
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
@@ -37,7 +50,13 @@ public class TypeNote extends AppCompatActivity {
                 } else {
                     String word = inputTitle.getText().toString();
                     String description = inputDescription.getText().toString();
-                    replyIntent.putExtra(EXTRA_TITLE, word);
+
+                    if(intent.hasExtra(EXTRA_ID)){
+                        replyIntent.putExtra(EXTRA_TITLE,sameTitle);
+                    }else {
+                        replyIntent.putExtra(EXTRA_TITLE, word);
+                    }
+                    replyIntent.putExtra(EXTRA_NOTE_TITLE, word);
                     replyIntent.putExtra(EXTRA_DESCRIPTION, description);
                     setResult(RESULT_OK, replyIntent);
                 }

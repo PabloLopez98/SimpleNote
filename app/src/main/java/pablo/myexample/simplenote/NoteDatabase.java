@@ -22,8 +22,6 @@ public abstract class NoteDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             NoteDatabase.class, "note_database")
-                            //.fallbackToDestructiveMigration()
-                            //.addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
@@ -51,11 +49,6 @@ public abstract class NoteDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            /*
-            mDao.deleteAllNotes();
-            Note note = new Note("indexTitle","...","test");
-            mDao.insert(note);
-            */
             return null;
         }
     }

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_MICROPHONE = 1;
 
     private NoteViewModel mNoteViewModel;
+    private NoteListAdapter adapter;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         checkMicPermssion();
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        final NoteListAdapter adapter = new NoteListAdapter(this);
+        //final NoteListAdapter
+        adapter = new NoteListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -126,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
     public void toTypeNote(View view) {
